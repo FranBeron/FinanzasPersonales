@@ -1,0 +1,62 @@
+﻿@model IEnumerable<FinanzasPersonales.Models.Gasto>
+@{
+    ViewData["Title"] = "Gastos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    @if (TempData["mensaje"] != null)
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            @TempData["mensaje"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                <span aria-hidden="true">&times;</span>?
+            </button>
+        </div>
+    }
+    <div class="row">
+        <div class="col-sm-6">
+            <h3>Gastos</h3>
+        </div>
+        <div class="col-sm-6">
+            <a class="btn btn-success d-block btn-sm " asp-action="Create" asp-controller="Gastos">Registrar Gasto</a>
+        </div>
+    </div>
+    <div class="row">
+        @if (Model.Count() > 0)
+        {
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <td>@Html.DisplayNameFor(m=>m.FechaGasto)</td>
+                        <td>@Html.DisplayNameFor(m=>m.Descripcion)</td>
+                        <td>@Html.DisplayNameFor(m=>m.Monto)</td>
+                        <td>@Html.DisplayNameFor(m=>m.Categoria)</td>
+                        <td>Acciones</td>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.FechaGasto.ToShortDateString()</td>
+                            <td>@item.Descripcion</td>
+                            <td>$UYU @item.Monto</td>
+                            <td>@item.Categoria.Name</td>
+                            <td>
+                                <a asp-controller="Gastos" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Editar</a>
+                                <a asp-controller="Gastos" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Eliminar</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No existen Gastos registrados</p>
+        }
+    </div>
+</div>
+

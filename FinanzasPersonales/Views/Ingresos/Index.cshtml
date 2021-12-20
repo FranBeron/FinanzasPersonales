@@ -1,0 +1,61 @@
+﻿@model IEnumerable<FinanzasPersonales.Models.Ingreso>
+@{
+    ViewData["Title"] = "Ingresos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    @if (TempData["mensaje"] != null)
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            @TempData["mensaje"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>?
+            </button>
+        </div>
+    }
+    <div class="row">
+        <div class="col-sm-6">
+            <h3>Ingresos</h3>
+        </div>
+        <div class="col-sm-6">
+            <a class="btn btn-success d-block  btn-sm " asp-action="Create" asp-controller="Ingresos">Registrar Ingreso</a>
+        </div>
+    </div>
+    <div class="row">
+        @if (Model.Count() > 0)
+        {
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <td>@Html.DisplayNameFor(m=>m.FechaIngreso)</td>
+                        <td>@Html.DisplayNameFor(m=>m.Descripcion)</td>
+                        <td>@Html.DisplayNameFor(m=>m.Monto)</td>
+                        <td>@Html.DisplayNameFor(m=>m.Categoria)</td>
+                        <td>Acciones</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.FechaIngreso.ToShortDateString()</td>
+                            <td>@item.Descripcion</td>
+                            <td>$UYU @item.Monto</td>
+                            <td>@item.Categoria.Name</td>
+                            <td>
+                                <a asp-controller="Ingresos" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Editar</a>
+                                <a asp-controller="Ingresos" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Eliminar</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No existen Ingresos registrados</p>
+        }
+    </div>
+</div>
+

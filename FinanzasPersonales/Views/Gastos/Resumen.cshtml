@@ -1,0 +1,33 @@
+﻿@using FinanzasPersonales.Models
+@model Gasto
+@{
+    ViewData["Title"] = "Resumen";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <h3>Resumen del mes</h3>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <td>Gastos</td>
+                    <td>Ingresos</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>$UYU @Html.ViewData["GastosResumen"] </td>
+                    <td>$UYU @Html.ViewData["IngresosResumen"] </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
